@@ -11,9 +11,9 @@ class Project_list {
     }
 
     /**
-     * Creating a new project element with its title and link to the workspace with its corresponding id and title. 
+     * Creating a new project element with its title and link to the workspace with its corresponding id and title.
      */
-    create = () => {        
+    create = () => {
         const project = document.createElement("div");
         project.className = "project row justify-between";
 
@@ -23,8 +23,9 @@ class Project_list {
         const sn = document.createElement("span");
         sn.className = "project-sn";
         sn.innerText = `${this.serial_number}.`;
-        
+
         const title = document.createElement("span");
+        const info = document.createElement("span");
         title.className = "title";
         title.innerText = this.project_info.project_name;
 
@@ -32,6 +33,7 @@ class Project_list {
         btn.className = "btn btn-link";
         btn.href = `./workspace.html?id=${this.project_info.id}&title=${this.project_info.project_name}`;
         btn.innerText = "Open project";
+        info.innerText = "Press on node to node to make a connection ";
 
         project_info.appendChild(sn);
         project_info.appendChild(title);
@@ -40,5 +42,5 @@ class Project_list {
         project.appendChild(btn);
 
         PROJECT_LIST.appendChild(project);
-    }
+    };
 }
