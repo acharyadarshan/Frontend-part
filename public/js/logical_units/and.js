@@ -18,7 +18,9 @@ class And {
             this.node.push(new Input(this.x, this.y + this.input_offset(index), 0));
         }
 
-        this.node.push(new Output(this.x + this.width, this.y + half_the_value(this.height)));
+        this.node.push(
+            new Output(this.x + this.width, this.y + half_the_value(this.height))
+        );
     }
 
     /**
@@ -62,10 +64,10 @@ class And {
         CONTEXT.fill();
 
         CONTEXT.closePath();
-    }
+    };
 
     /**
-     *  A function that reads the number of inputs and returns the state of the gate. 
+     *  A function that reads the number of inputs and returns the state of the gate.
      * @returns the state based on the input nodes.
      */
     operate = () => {
@@ -77,14 +79,14 @@ class And {
 
         if (count_low_state === this.number_of_inputs) return 1;
         else return 0;
-    }
+    };
 
     /**
-     * It is used to update the state of the gate. 
+     * It is used to update the state of the gate.
      */
     run = () => {
         this.node[this.number_of_inputs].state = this.operate();
-    }
+    };
 
     /**
      *  A function that checks if the mouse is clicked on the nodes.
@@ -95,6 +97,7 @@ class And {
     clicked = (x, y, object_index) => {
         for (let index in this.node) {
             this.node[index].clicked(x, y, object_index, index);
+            this.node[index].clicked(x, y, object_index++, index++);
         }
-    }
+    };
 }
