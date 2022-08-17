@@ -8,7 +8,7 @@ const ONE_SECOND = 1000;
 
 const CANVAS = document.getElementById("workspace");
 
-const LINEWIDTH = 3;
+const LINEWIDTH = 3.5;
 
 const CLIENT_DX = 300;
 
@@ -18,7 +18,7 @@ CANVAS.height = window.innerHeight;
 const CANVAS_WIDTH = CANVAS.width;
 const CANVAS_HEIGHT = CANVAS.height;
 
-const CONTEXT = CANVAS.getContext('2d');
+const CONTEXT = CANVAS.getContext("2d");
 CONTEXT.lineWidth = LINEWIDTH;
 
 const FILL_COLOR = "#fa8072";
@@ -44,9 +44,8 @@ let mouse_x, mouse_y;
 const NODE_SELECTED = document.getElementById("node_selected");
 let selected_input_output_node = [];
 
-
 const CURRENT_URL = new URLSearchParams(window.location.search);
-let project_id = CURRENT_URL.get('id');
+let project_id = CURRENT_URL.get("id");
 
 // DOM components
 const CLEAR_NODE_SELECTION = document.getElementById("clear_node_selection");
@@ -62,7 +61,9 @@ const INFORMATION_DATA = [];
 //DOM logical units
 const AND_BTN = [...document.getElementsByClassName("and_gate")];
 const FREQUENCY_VALUE = document.getElementById("frequency_value");
-const FREQUENCY_GENERATOR_BTN = [...document.getElementsByClassName("frequency_generator")];
+const FREQUENCY_GENERATOR_BTN = [
+    ...document.getElementsByClassName("frequency_generator"),
+];
 const SWITCH_BTN = document.getElementById("switch_input");
 const JK_BTN = document.getElementById("jk_flipflop");
 const LIGHT_BTN = document.getElementById("light_output");
@@ -74,7 +75,6 @@ const SR_BTN = document.getElementById("sr_flipflop");
 const XOR_BTN = [...document.getElementsByClassName("xor_gate")];
 const XNOR_BTN = [...document.getElementsByClassName("xnor_gate")];
 const T_BTN = document.getElementById("t_flipflop");
-
 
 const POSITION_X = CANVAS_WIDTH - 100;
 const POSITION_Y = 10;
