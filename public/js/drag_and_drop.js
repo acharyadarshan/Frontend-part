@@ -10,7 +10,16 @@ let select_unit = (event) => {
     mouse_y = event.y - y;
 
     for (let index in units) {
-        if (check_mouse_in_unit(mouse_x, mouse_y, units[index].x, units[index].y, units[index].width, units[index].height)) {
+        if (
+            check_mouse_in_unit(
+                mouse_x,
+                mouse_y,
+                units[index].x,
+                units[index].y,
+                units[index].width,
+                units[index].height
+            )
+        ) {
             selected_unit = index;
             update_information_section();
             units[selected_unit].stroke = true;
@@ -26,7 +35,7 @@ let select_unit = (event) => {
             return;
         }
     }
-}
+};
 
 /**
  * If the user is dragging a unit, prevent the default action, get the mouse position, set the unit's position to the mouse position, and draw the canvas.
@@ -40,14 +49,11 @@ let move_unit = (event) => {
 
     mouse_x = event.x - x;
     mouse_y = event.y - y;
-
-    units[selected_unit].x = mouse_x - dx;
-    units[selected_unit].y = mouse_y - dy;
     dx = mouse_x - units[selected_unit].x;
     dy = mouse_y - units[selected_unit].y;
 
     draw_canvas();
-}
+};
 
 /**
  * If the user is dragging a unit, prevent the default action of the event, and set the stroke of the
@@ -59,10 +65,12 @@ let deselect_unit = (event) => {
     if (!drag_unit) return;
 
     event.preventDefault();
+    units[selected_unit].x = mouse_x - dx;
+    units[selected_unit].y = mouse_y - dy;
 
     units[selected_unit].stroke = false;
     drag_unit = false;
-}
+};
 
 CANVAS.onmousedown = select_unit;
 CANVAS.onmousemove = move_unit;
