@@ -8,48 +8,50 @@ class Information {
         this.create_section();
     }
 
-    /** 
-     * Creating a information section with title, description and truth table of the units. 
+    /**
+     * Creating a information section with title, description and truth table of the units.
      */
-    create_section = () => {
-        const title = document.createElement('h4');
-        title.innerText = this.unit_information.title;
-        title.style.marginBottom = ".5rem";
-        INFORMATION_SECTION.appendChild(title);
 
-        const description = document.createElement('p');
-        description.innerText = this.unit_information.description;
-        INFORMATION_SECTION.appendChild(description);
+    //truth table bug needs to resolve
+    // create_section = () => {
+    //     const title = document.createElement('h4');
+    //     title.innerText = this.unit_information.title;
+    //     title.style.marginBottom = ".5rem";
+    //     INFORMATION_SECTION.appendChild(title);
 
-        if (this.unit_information.truth_table) {
-            const table_label = document.createElement('label');
-            table_label.htmlFor = "truth_table";
-            table_label.innerText = "Truth Table";
-            table_label.style.width = "100%";
-            INFORMATION_SECTION.appendChild(table_label);
+    //     const description = document.createElement('p');
+    //     description.innerText = this.unit_information.description;
+    //     INFORMATION_SECTION.appendChild(description);
 
-            const table = document.createElement('table');
-            table.id = "truth_table";
+    //     if (this.unit_information.truth_table) {
+    //         const table_label = document.createElement('label');
+    //         table_label.htmlFor = "truth_table";
+    //         table_label.innerText = "Truth Table";
+    //         table_label.style.width = "100%";
+    //         INFORMATION_SECTION.appendChild(table_label);
 
-            this.unit_information.truth_table.forEach(row => {
-                const table_row = document.createElement('tr');
+    //         const table = document.createElement('table');
+    //         table.id = "truth_table";
 
-                const keys = Object.keys(row).sort();
+    //         this.unit_information.truth_table.forEach(row => {
+    //             const table_row = document.createElement('tr');
 
-                for (let key of keys) {
-                    const table_data = document.createElement('td');
+    //             const keys = Object.keys(row).sort();
 
-                    table_data.innerText = row[key];
+    //             for (let key of keys) {
+    //                 const table_data = document.createElement('td');
 
-                    table_row.appendChild(table_data);
-                }
+    //                 table_data.innerText = row[key];
 
-                table.appendChild(table_row);
-            });
+    //                 table_row.appendChild(table_data);
+    //             }
 
-            INFORMATION_SECTION.appendChild(table);
-        }
-    }
+    //             table.appendChild(table_row);
+    //         });
+
+    //         INFORMATION_SECTION.appendChild(table);
+    //     }
+    // }
 }
 
 /**
@@ -60,7 +62,7 @@ const update_information_section = () => {
         INFORMATION_SECTION.innerHTML = "";
     } else {
         INFORMATION_SECTION.innerHTML = "";
-        
+
         INFORMATION_DATA.forEach((data) => {
             console.log("...", data.id);
             if (data.id === units[selected_unit].name) {
@@ -69,4 +71,4 @@ const update_information_section = () => {
             }
         });
     }
-}
+};
