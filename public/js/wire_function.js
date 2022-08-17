@@ -71,6 +71,21 @@ const delete_wire_event = (event) => {
 
         units[index].clicked(mouse_x, mouse_y, index);
     }
+    const update_wire = () => {
+        if (selected_input_output_node.length === 2) {
+            const first_node = selected_input_output_node[0];
+            const second_node = selected_input_output_node[1];
+            const third_node = selected_input_output_node[3];
+
+            index_for_unit++;
+            units[index_for_unit] = new Wire(
+                units[first_node[0]].node[first_node[1]],
+                units[second_node[0]].node[second_node[1]],
+                first_node,
+                second_node
+            );
+        }
+    };
 };
 
 CANVAS.onclick = input_output_nodes;
