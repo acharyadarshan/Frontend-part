@@ -1,5 +1,5 @@
 /**
- * Clearing the node selection. 
+ * Clearing the node selection.
  */
 CLEAR_NODE_SELECTION.addEventListener(CLICK_EVENT, () => {
     const index = selected_input_output_node[0];
@@ -16,12 +16,32 @@ DELETE_SELECTED_NODE.addEventListener(CLICK_EVENT, () => {
 
     for (let index in units) {
         if (units[index].name === "Wire") {
-            if (units[index].input_ref[0] === selected_unit || units[index].output_ref[0] === selected_unit) {
+            if (
+                units[index].input_ref[0] === selected_unit ||
+                units[index].output_ref[0] === selected_unit
+            ) {
                 units[index].delete_unit(index);
             }
         }
     }
     selected_unit = null;
+});
+UPDATE_PROJECT.addEventListener(CLICK_EVENT, () => {
+    if (project_id === "null") {
+        STATUS.innerText = "Project update";
+    } else if (confirm(`Update project: ${CURRENT_URL.get("title")} ?`)) {
+        update_project_data(project_id)
+            .then((response) => {
+                if (response.success) {
+                    window.location.replace("./index.html");
+                } else {
+                    STATUS.innerText = "Project from previous state";
+                }
+            })
+            .catch(() => {
+                STATUS.innerText = "Failed to update!";
+            });
+    }
 });
 
 SAVE_PROJECT.addEventListener(CLICK_EVENT, () => {
@@ -35,14 +55,14 @@ SAVE_PROJECT.addEventListener(CLICK_EVENT, () => {
     }
 
     const data = {
-        "id": project_id,
-        "project_data": {
-            "project_name": PROJECT_TITLE.value,
-            "data": { ...project_data }
-        }
-    }
+        id: project_id,
+        project_data: {
+            project_name: PROJECT_TITLE.value,
+            data: { ...project_data },
+        },
+    };
 
-    send_project_data(data).then(response => {
+    send_project_data(data).then((response) => {
         if (response.success) {
             STATUS.innerText = "Saved";
             if (!!response.project_id) {
@@ -52,22 +72,23 @@ SAVE_PROJECT.addEventListener(CLICK_EVENT, () => {
         } else {
             STATUS.innerText = "Failed to save";
         }
-    })
+    });
 });
 
 DELETE_PROJECT.addEventListener(CLICK_EVENT, () => {
     if (project_id === "null") {
         STATUS.innerText = "Project not saved";
-    }
-    else if (confirm(`Delete project: ${CURRENT_URL.get("title")} ?`)) {
-        delete_project_data(project_id).then(response => {
-            if (response.success) {
-                window.location.replace("./index.html");
-            } else {
-                STATUS.innerText = "Delete project failed!!!";
-            }
-        }).catch(() => {
-            STATUS.innerText = "Failed to delete!";
-        })
+    } else if (confirm(`Delete project: ${CURRENT_URL.get("title")} ?`)) {
+        delete_project_data(project_id)
+            .then((response) => {
+                if (response.success) {
+                    window.location.replace("./index.html");
+                } else {
+                    STATUS.innerText = "Delete project failed!!!";
+                }
+            })
+            .catch(() => {
+                STATUS.innerText = "Failed to delete!";
+            });
     }
 });
